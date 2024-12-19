@@ -15,10 +15,9 @@ npm i @angular-architects/native-federation@17.0.0
 
 ng add @angular-architects/native-federation --project mfe2 --port 47083 --type remote
 
-ng g c modules\lavado\main 
+ng g c modules\lavado\main --skip-tests
 
-
-ng g c modules\lavado\test
+ng g c modules\lavado\test --skip-tests
 
 
 agregar archivo  
@@ -69,3 +68,7 @@ agregar routas al archivo **federation.config.js**
     './routes': './src/app/app.routes.ts',
   },
 ```
+
+instalar 
+
+npm i @angular/material@17.3.10

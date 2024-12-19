@@ -1,0 +1,4 @@
+export enum RoleApp {
+    User = 'C3C4AD8C-65B6-4454-A0F9-A5F75E897705',
+    Admin = 'FCF2CE20-8C62-44F7-A7F2-AC910433C4C8',
+}

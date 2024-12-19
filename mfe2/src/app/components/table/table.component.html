@@ -1,0 +1,59 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="text-center" *ngFor="let col of cols">
+                    {{col.label}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="d-flex" *ngFor="let item of values" class="">
+                <td *ngFor="let col of cols; let i = index"
+                    [ngClass]="{'d-flex flex-row gap-2 justify-content-center': col.button}">
+                    <ng-container *ngIf="col.button; else textCell">
+                        <div *ngFor="let button of item[col.name]" class="d-flex flex-row">
+                            <ng-container>
+                                <button mat-flat-button *ngIf="button.funcionActive" [style.color]="button.color"
+                                    [style.backgroundColor]="button.fondoColor" class="" (click)="button.funcion()">
+                                    <mat-icon>{{button.icon}}</mat-icon>
+                                    {{button.label}}
+                                </button>
+                                <button mat-flat-button *ngIf="button.link" [style.color]="button.color"
+                                    [routerLink]="button.url" [style.backgroundColor]="button.fondoColor" class="">
+                                    <mat-icon>{{button.icon}}</mat-icon>
+                                    {{button.label}}
+                                </button>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <ng-template #textCell>
+                        <ng-container *ngIf="col.text">
+                            <div class="">{{item[col.name]}}</div>
+                        </ng-container>
+                        <ng-container *ngIf="col.price">
+                            ${{item[col.name] | number}}
+                        </ng-container>
+                        <ng-container *ngIf="col.fecha">
+                            {{item[col.name] | date:'dd-MM-yyyy'}}
+                        </ng-container>
+                        <ng-container *ngIf="col.percent">
+                            <div class="text-center">
+                                {{item[col.name]}} %
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="col.imgCateg">
+                            <div class=" d-flex justify-content-center align-items-center">
+                                <img [src]="item[col.name]" alt="imagen Categoría" style="width: 50px; height: 50px;">
+                            </div>
+                        </ng-container>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="d-flex flex-row gap-2 justify-content-center align-items-center">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons [length]="length" [pageSize]="pageSize"
+        (page)="handlePageEvent($event)"></mat-paginator>
+</div>
