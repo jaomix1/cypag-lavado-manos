@@ -12,78 +12,10 @@ import { GetComboDto } from 'src/combos/dto/get-combo.dto';
 @ApiTags('cup/combos')
 @Controller('combos')
 @UseFilters(new HttpExceptionFilter())
-@UseGuards(JwtAuthGuard)
-@Roles(RoleApp.User, RoleApp.Admin)
+// @UseGuards(JwtAuthGuard)
+// @Roles(RoleApp.User, RoleApp.Admin)
 export class ComboController {
   constructor(private readonly comboService: ComboService) { }
-
-  // @Get('departamentos')
-  // @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  // @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  // async departamentos() {
-  //   try {
-  //     return await this.comboService.getDepartamentos();
-  //   } catch (error) {
-  //     throw new HttpException(error.response.message, error.getStatus());
-  //   }
-  // }
-
-  // @Get('ciudades/:departamentoId')
-  // @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  // @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  // async ciudades(@Param('departamentoId') departamentoId: number) {
-  //   try {
-  //     return await this.comboService.getCiudades(departamentoId);
-  //   } catch (error) {
-  //     throw new HttpException(error.response.message, error.getStatus());
-  //   }
-  // }
-
-  @Get('grupos')
-  @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  async grupos() {
-    try {
-      return await this.comboService.GetComboGrupo();
-    } catch (error) {
-      throw new HttpException(error.response.message, error.getStatus());
-    }
-  }
-
-  @Get('subGrupos')
-  @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  async subGrupos() {
-    try {
-      return await this.comboService.GetComboSubGrupo();
-    } catch (error) {
-      throw new HttpException(error.response.message, error.getStatus());
-    }
-  }
-
-
-  @Get('tipoContratos')
-  @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  async tipoContratistas() {
-    try {
-      return await this.comboService.GetComboTipoContratista();
-    } catch (error) {
-      throw new HttpException(error.response.message, error.getStatus());
-    }
-  }
-
-  @Get('soatGrupos')
-  @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
-  @ApiResponse({ status: 400, description: 'Error controlado', type: ErrorModel })
-  async soatGrupos() {
-    try {
-      return await this.comboService.GetComboSoatGrupo();
-    } catch (error) {
-      throw new HttpException(error.response.message, error.getStatus());
-    }
-  }
-
 
   @Get('empresas')
   @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })
@@ -95,8 +27,6 @@ export class ComboController {
       throw new HttpException(error.response.message, error.getStatus());
     }
   }
-
-
 
   @Get('sedes')
   @ApiResponse({ status: 200, description: 'obtener registros', type: [GetComboDto] })

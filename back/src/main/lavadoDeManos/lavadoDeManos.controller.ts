@@ -13,16 +13,16 @@ import { GetCupDto } from './dto/get-cup.dto';
 import { FilterCupDto } from './dto/filter-cup.dto';
 import { UpdateCupDto } from './dto/update-cup.dto';
 
-import { CupsService } from './cups.service';
+import { LavadoDeManosService } from './lavadoDeManos.service';
 
-@ApiTags('cups')
-@Controller('cups')
+@ApiTags('lavadoDeManos')
+@Controller('lavadoDeManos')
 
 @UseFilters(new HttpExceptionFilter())
 @UseGuards(JwtAuthGuard)
 @Roles(RoleApp.User)
-export class CupsController {
-  constructor(private readonly service: CupsService) { }
+export class LavadoDeManosController {
+  constructor(private readonly service: LavadoDeManosService) { }
 
   @Post()
   @ApiResponse({ status: 200, description: 'obtener registros', type: GetCupDto })

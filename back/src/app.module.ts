@@ -3,16 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CupsModule } from './main/cups/cups.module';
+import { LavadoDeManosModule } from './main/lavadoDeManos/lavadoDeManos.module';
 import { CrudsModule } from './cruds/cruds.module';
 import { RolesGuard } from './common/role/roles.guard';
 import { JwtStrategy } from './common/jwt/jwt-strategy';
 import { PostStatusInterceptor } from './common/post-status.interceptor';
 import { JwtModule } from '@nestjs/jwt';
 import { ComboModule } from './combos/combo.module';
-import { CupSedesModule } from './main/cup-sedes/cup-sedes.module';
-import { TercerosModule } from './main/terceros/terceros.module';
-import { TerceroContratosModule } from './main/tercero-contratos/tercero-contratos.module';
 
 @Module({
   imports: [
@@ -27,10 +24,7 @@ import { TerceroContratosModule } from './main/tercero-contratos/tercero-contrat
     ComboModule,
     CrudsModule,
 
-    CupsModule,
-    CupSedesModule,
-    TercerosModule,
-    TerceroContratosModule,
+    LavadoDeManosModule,
   ],
   controllers: [
     AppController

@@ -1,36 +1,38 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { BadRequestException, HttpException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as sql from 'mssql';
 
 import { MyConfig } from 'src/common/config';
 import { ResponseModel } from 'src/common/model/response';
 
-
-import { CreateCupSedeDto } from './dto/create-cup-sede.dto';
-import { UpdateCupSedeDto } from './dto/update-cup-sede.dto';
-import { GetCupSedeDto } from './dto/get-cup-sede.dto';
-import { FilterCupSedeDto } from './dto/filter-cup-sede.dto';
+import { CreateCupDto } from './dto/create-cup.dto';
+import { UpdateCupDto } from './dto/update-cup.dto';
+import { GetCupDto } from './dto/get-cup.dto';
+import { FilterCupDto } from './dto/filter-cup.dto';
 import { copy } from 'src/common/copy';
 
 @Injectable()
-export class CupSedesService {
+export class LavadoDeManosService {
   constructor(private config: MyConfig) {
   }
 
-  async create(data: CreateCupSedeDto, ususarioId: any) {
+  async create(data: CreateCupDto, ususarioId: any) {
     try {
 
       const pool = await sql.connect(this.config.configBd())
       const result = await pool.request()
         .input('usuarioId', sql.VarChar, ususarioId)
-        .input('cupId', sql.Int, data.cupId)
-        .input('sedeId', sql.Int, data.sedeId)
-        .input('empresaId', sql.Int, data.empresaId)
-        .input('terceroContratoId', sql.Int, data.terceroContratoId)
-        .input('costo', sql.Decimal(18, 2), data.costo)
-        .execute('[cup].[CreateCupSede]')
+        .input('codigo', sql.VarChar(20), data.codigo)
+        .input('descripcion', sql.VarChar(70), data.descripcion)
+        .input('codigoSoat', sql.VarChar(20), data.codigoSoat)
+        .input('uvrIss', sql.Decimal(18, 2), data.uvrIss)
+        .input('valorIss', sql.Decimal(18, 2), data.valorIss)
+        .input('soatGrupoId', sql.Int, data.soatGrupoId)
+        .input('valorSoat', sql.Decimal(18, 2), data.valorSoat)
+        .input('grupoId', sql.Int, data.grupoId)
+        .input('subGrupoId', sql.Int, data.subGrupoId)
+        .execute('[cup].[CreateCup]')
 
-      const response: GetCupSedeDto = { ...result.recordset[0] };
+      const response: GetCupDto = { ...result.recordset[0] };
 
       return response;
 
@@ -39,16 +41,16 @@ export class CupSedesService {
     }
   }
 
-  async findAll(id: number, data: FilterCupSedeDto) {
+  async findAll(data: FilterCupDto) {
     try {
       const pool = await sql.connect(this.config.configBd())
       const result = await pool.request()
-        .input('cupId', sql.Int, id)
         .input('page', sql.Int, data.page ? data.page : 0)
         .input('rowsByPag', sql.Int, data.rowsByPag ? data.rowsByPag : 10)
-        .execute('cup.GetAllCupSedesByCupId')
+        .input('codigo', sql.VarChar(20), data.codigo)
+        .execute('cup.GetAllCups')
 
-      const response = new ResponseModel<GetCupSedeDto>();
+      const response = new ResponseModel<GetCupDto>();
       response.count = result.recordsets[0][0].Count;
       response.data = result.recordsets[0][0].Count != 0 ? result.recordsets[1] : [];
       return response;
@@ -61,14 +63,14 @@ export class CupSedesService {
     try {
       const pool = await sql.connect(this.config.configBd())
       const result = await pool.request()
-        .input('cupSedeId', sql.Int, id)
-        .execute('[cup].[GetCupSedeById]')
+        .input('cupId', sql.Int, id)
+        .execute('[cup].[GetCupById]')
 
       if (result.recordset[0] === undefined) {
         throw new BadRequestException(copy.DatosNoEncontrados);
       }
 
-      const response: GetCupSedeDto = { ...result.recordset[0] };
+      const response: GetCupDto = { ...result.recordset[0] };
 
       return response;
     } catch (error) {
@@ -80,21 +82,25 @@ export class CupSedesService {
     }
   }
 
-  async update(id: number, data: UpdateCupSedeDto, ususarioId: any) {
+  async update(id: number, data: UpdateCupDto, ususarioId: any) {
     try {
 
       const pool = await sql.connect(this.config.configBd())
       const result = await pool.request()
         .input('usuarioId', sql.VarChar, ususarioId)
-        .input('cupSedeId', sql.Int, id)
-        .input('cupId', sql.Int, data.cupId)
-        .input('sedeId', sql.Int, data.sedeId)
-        .input('empresaId', sql.Int, data.empresaId)
-        .input('terceroContratoId', sql.Int, data.terceroContratoId)
-        .input('costo', sql.Decimal(18, 2), data.costo)
-        .execute('[cup].[UpdateCupSede]')
+        .input('cupId', sql.Int, id)
+        .input('codigo', sql.VarChar(20), data.codigo)
+        .input('descripcion', sql.VarChar(70), data.descripcion)
+        .input('codigoSoat', sql.VarChar(20), data.codigoSoat)
+        .input('uvrIss', sql.Decimal(18, 2), data.uvrIss)
+        .input('valorIss', sql.Decimal(18, 2), data.valorIss)
+        .input('soatGrupoId', sql.Int, data.soatGrupoId)
+        .input('valorSoat', sql.Decimal(18, 2), data.valorSoat)
+        .input('grupoId', sql.Int, data.grupoId)
+        .input('subGrupoId', sql.Int, data.subGrupoId)
+        .execute('[cup].[UpdateCup]')
 
-      const response: GetCupSedeDto = { ...result.recordset[0] };
+      const response: GetCupDto = { ...result.recordset[0] };
 
       return response;
 
@@ -108,8 +114,8 @@ export class CupSedesService {
       const pool = await sql.connect(this.config.configBd())
       const result = await pool.request()
         .input('usuarioId', sql.VarChar, ususarioId)
-        .input('cupSedeId', sql.Int, id)
-        .execute('[cup].[DeleteCupSede]')
+        .input('cupId', sql.Int, id)
+        .execute('[cup].[DeleteCup]')
 
       return true;
     } catch (error) {
