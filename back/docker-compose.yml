@@ -1,6 +1,6 @@
 services:
-  cupsback:
-    image: cypagcupsback:latest
+  lavadodemanosback:
+    image: cypaglavadodemanosback:latest
     # build:
     #   context: .
     #   dockerfile: ./back/Dockerfile
@@ -16,14 +16,14 @@ services:
     ports:
       - 3001:3001
 
-  cupsfront:
-    image: cypagcupsfront:latest
+  lavadodemanosfront:
+    image: cypaglavadodemanosfront:latest
     # build:
     #   context: .
     #   dockerfile: ./Dockerfile
     ports:
-      - 47082:80
+      - 47083:80
     # environment:
     #   - REACT_APP_API_URL
     depends_on:
-      - cupsback
+      - lavadodemanosback

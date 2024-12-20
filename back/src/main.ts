@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Cups API')
-    .setDescription('The Cups API description')
+    .setTitle('LavadoDeManos API')
+    .setDescription('The LavadoDeManos API description')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -18,7 +18,12 @@ async function bootstrap() {
   const port = process.env.PORT || 3001;
 
   app.enableCors({
-    origin: ['http://localhost:47082', 'http://localhost:47080', 'http://remotodg.previsalud.net:47082', 'http://remotodg.previsalud.net:47080'],
+    origin: [
+      'http://localhost:47080',
+      'http://remotodg.previsalud.net:47080',
+      'http://localhost:47083',
+      'http://remotodg.previsalud.net:47083',
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
 

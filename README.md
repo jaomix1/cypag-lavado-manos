@@ -28,9 +28,9 @@ export const LavadoRoutes: Routes = [
         path: 'main',
         component: MainComponent,
         // children: [
-        //     { path: '', component: ListCupsComponent },
-        //     { path: 'listCup', component: ListCupsComponent },
-        //     { path: 'detallecup/:id', component: DetailCupComponent }
+        //     { path: '', component: ListLavadoDeManosComponent },
+        //     { path: 'listLavadoDeMano', component: ListLavadoDeManosComponent },
+        //     { path: 'detallecup/:id', component: DetailLavadoDeManoComponent }
 
         // ]
     }

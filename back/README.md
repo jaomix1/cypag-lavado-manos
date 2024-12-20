@@ -1,14 +1,14 @@
 
 ## Nuevo proyecto
 ```Sh	
-nest new cups
+nest new lavadodemanos
 ```
 
 ## Generar un recurso
 [Documentacion](https://docs.nestjs.com/recipes/crud-generator#generating-a-new-resource)
 
 ```Sh
-nest g resource main/cups  --no-spec
+nest g resource main/lavadodemanos  --no-spec
 ```
 
 - What transport layer do you use? *REST API*
@@ -73,13 +73,13 @@ npm run start:dev
 
 Construir la imagen
 ```sh
-docker build -t cypagcupsfront:latest .
+docker build -t cypaglavadodemanosfront:latest .
 ```
 o 
 ```sh
-docker build -t cypagcupsback:v1 .
+docker build -t cypaglavadodemanosback:v1 .
 
-docker tag cypagcupsback:v1 cypagcupsback:latest
+docker tag cypaglavadodemanosback:v1 cypaglavadodemanosback:latest
 ```
 
 ejecutar imagen
@@ -88,5 +88,5 @@ FOR /F "tokens=*" %i IN ('docker ps -q --filter "publish=3001"') DO docker stop 
 
 FOR /F "tokens=*" %i IN ('docker ps -aq --filter "publish=3001"') DO docker rm %i
 
-docker run -p 3001:3001 --env-file .envcypagcupsback:latest
+docker run -p 3001:3001 --env-file .envcypaglavadodemanosback:latest
 ```

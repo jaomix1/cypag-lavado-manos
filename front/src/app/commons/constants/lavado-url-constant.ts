@@ -1,12 +1,12 @@
 export const UrlConstants = {
 
 
-    cups: {
-        getAll: 'cups/all',
-        getOne: 'cups/',
-        create: 'cups/',
-        update: 'cups/',
-        delete: 'cups/'
+    lavadodemanos: {
+        getAll: 'lavadodemanos/all',
+        getOne: 'lavadodemanos/',
+        create: 'lavadodemanos/',
+        update: 'lavadodemanos/',
+        delete: 'lavadodemanos/'
     },
 
     sedes: {

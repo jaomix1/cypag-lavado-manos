@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LavadoDeManosModule } from './main/lavadoDeManos/lavadoDeManos.module';
+//import { LavadoDeManosModule } from './main/lavadoDeManos/lavadoDeManos.module';
 import { CrudsModule } from './cruds/cruds.module';
 import { RolesGuard } from './common/role/roles.guard';
 import { JwtStrategy } from './common/jwt/jwt-strategy';
@@ -24,7 +24,7 @@ import { ComboModule } from './combos/combo.module';
     ComboModule,
     CrudsModule,
 
-    LavadoDeManosModule,
+    //LavadoDeManosModule,
   ],
   controllers: [
     AppController

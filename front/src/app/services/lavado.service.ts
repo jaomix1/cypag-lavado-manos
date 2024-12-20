@@ -21,15 +21,15 @@ export class LavadoService {
   private readonly _baseHttp = inject(BaseHttpClientService);
 
   getAll(filter: LavadoFilter): Observable<Response<Lavado>> {
-    return this._baseHttp.post<Response<Lavado>>(`${this.constants.webApi}${UrlConstants.cups.getAll}`, filter)
+    return this._baseHttp.post<Response<Lavado>>(`${this.constants.webApi}${UrlConstants.lavadodemanos.getAll}`, filter)
   }
 
   create(cup: any): Observable<Lavado> {
-    return this._baseHttp.post<Lavado>(`${this.constants.webApi}${UrlConstants.cups.create}`, cup)
+    return this._baseHttp.post<Lavado>(`${this.constants.webApi}${UrlConstants.lavadodemanos.create}`, cup)
   }
 
   getById(idLavado: number): Observable<Lavado> {
-    return this._baseHttp.get<Lavado>(`${this.constants.webApi}${UrlConstants.cups.getOne}` + idLavado)
+    return this._baseHttp.get<Lavado>(`${this.constants.webApi}${UrlConstants.lavadodemanos.getOne}` + idLavado)
 
   }
 
